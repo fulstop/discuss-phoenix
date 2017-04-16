@@ -33,7 +33,7 @@ defmodule Discuss.TopicController do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Saved!")
-        |> redirect(to: "/")
+        |> redirect(to: topic_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -52,5 +52,15 @@ defmodule Discuss.TopicController do
       {:error, changeset} ->
         render(conn, "edit.html", topic: topic, changeset: changeset)
     end
+  end
+
+  def delete(conn, params) do
+    %{"id" => id} = params
+    Repo.get!(Topic, id)
+    |> Repo.delete!
+
+    conn
+    |> put_flash(:info, "Topic was deleted")
+    |> redirect(to: topic_path(conn, :index))
   end
 end
