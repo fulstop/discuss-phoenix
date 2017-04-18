@@ -15,6 +15,12 @@ defmodule Discuss.AuthController do
     sign_in(conn, changeset)
   end
 
+  def logout(conn, _params) do
+    conn
+    |> put_session(:user_id, nil)
+    |> redirect(to: topic_path(conn, :index))
+  end
+
   defp sign_in(conn, changeset) do
     case insert_or_update_user(changeset) do
       {:ok, user} ->

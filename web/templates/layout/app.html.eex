@@ -17,9 +17,14 @@
   <body>
     <nav class="light-blue">
       <div class="nav-wrapper container">
-        <a href="/" class="brand-logo">
-          Discuss
-        </a>
+        <%= link "Discuss", to: topic_path(@conn, :index), class: "brand-logo" %>
+        <ul class="right">
+          <%= if @conn.assigns[:user] do %>
+            <li><%= link "Logout", to: auth_path(@conn, :logout) %></li>
+          <% else %>
+            <li><%= link "Login with GitHub", to: auth_path(@conn, :request, :github) %></li>
+          <% end %>
+        </ul>
       </div>
     </nav>
 
