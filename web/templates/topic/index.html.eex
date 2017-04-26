@@ -3,7 +3,7 @@
   <%= for topic <- @topics do %>
     <li class="collection-item">
       <%= link(topic.title, to: topic_path(@conn, :show, topic)) %>
-      <div class="right">
+      <div class="secondary-content">
         <%= link "Edit", to: topic_path(@conn, :edit, topic) %>
         <%= link "Delete", to: topic_path(@conn, :delete, topic), method: :delete %>
       </div>

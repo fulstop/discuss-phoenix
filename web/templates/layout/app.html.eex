@@ -11,22 +11,10 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   </head>
 
   <body>
-    <nav class="light-blue">
-      <div class="nav-wrapper container">
-        <%= link "Discuss", to: topic_path(@conn, :index), class: "brand-logo" %>
-        <ul class="right">
-          <%= if @conn.assigns[:user] do %>
-            <li><%= link "Logout", to: auth_path(@conn, :logout) %></li>
-          <% else %>
-            <li><%= link "Login with GitHub", to: auth_path(@conn, :request, :github) %></li>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
+    <%= render "_header.html", conn: @conn %>
 
     <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -35,8 +23,8 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
+    </div>
 
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

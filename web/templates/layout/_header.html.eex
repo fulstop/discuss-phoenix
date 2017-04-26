@@ -1,0 +1,13 @@
+<nav class="deep-purple">
+  <div class="nav-wrapper container">
+    <%= link "Discuss", to: topic_path(@conn, :index), class: "brand-logo" %>
+    <ul class="right">
+      <%= if @conn.assigns[:user] do %>
+        <li><%= link "Logout", to: auth_path(@conn, :logout) %></li>
+      <% else %>
+        <li><%= link "Login with GitHub", to: auth_path(@conn, :request, :github) %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
